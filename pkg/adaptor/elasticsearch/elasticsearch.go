@@ -131,7 +131,8 @@ func (e *Elasticsearch) applyOp(msg *message.Msg) (*message.Msg, error) {
 	if err != nil {
 		id = ""
 	}
-
+	delete(msg.Map(), "_id")
+	
 	_, _type, err := msg.SplitNamespace()
 	if err != nil {
 		e.pipe.Err <- adaptor.NewError(adaptor.ERROR, e.path, fmt.Sprintf("unable to determine type from msg.Namespace (%s)", msg.Namespace), msg)
