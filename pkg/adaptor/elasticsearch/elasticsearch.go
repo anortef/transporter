@@ -6,9 +6,9 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/compose/transporter/pkg/adaptor"
-	"github.com/compose/transporter/pkg/message"
-	"github.com/compose/transporter/pkg/pipe"
+	"github.com/anortef/transporter/pkg/adaptor"
+	"github.com/anortef/transporter/pkg/message"
+	"github.com/anortef/transporter/pkg/pipe"
 	elastigo "github.com/mattbaird/elastigo/lib"
 )
 
@@ -127,11 +127,10 @@ func (e *Elasticsearch) applyOp(msg *message.Msg) (*message.Msg, error) {
 
 	// TODO there might be some inconsistency here.  elasticsearch uses the _id field for an primary index,
 	//  and we're just mapping it to a string here.
-	id, err := msg.IDString("_id")
+	id, err := msg.IDString("__id")
 	if err != nil {
 		id = ""
 	}
-	delete(msg.Map(), "_id")
 	
 	_, _type, err := msg.SplitNamespace()
 	if err != nil {

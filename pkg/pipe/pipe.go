@@ -10,8 +10,8 @@ import (
 	"regexp"
 	"time"
 
-	"github.com/compose/transporter/pkg/events"
-	"github.com/compose/transporter/pkg/message"
+	"github.com/anortef/transporter/pkg/events"
+	"github.com/anortef/transporter/pkg/message"
 )
 
 type messageChan chan *message.Msg

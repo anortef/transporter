@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/compose/transporter/pkg/pipe"
+	"github.com/anortef/transporter/pkg/pipe"
 )
 
 // a random type that adaptorements the adaptor interface

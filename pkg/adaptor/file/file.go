@@ -8,9 +8,9 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/compose/transporter/pkg/adaptor"
-	"github.com/compose/transporter/pkg/message"
-	"github.com/compose/transporter/pkg/pipe"
+	"github.com/anortef/transporter/pkg/adaptor"
+	"github.com/anortef/transporter/pkg/message"
+	"github.com/anortef/transporter/pkg/pipe"
 )
 
 // File is an adaptor that can be used as a
