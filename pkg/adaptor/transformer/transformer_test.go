@@ -4,8 +4,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/anortef/transporter/pkg/message"
-	"github.com/anortef/transporter/pkg/pipe"
+	"github.com/cornerjob/transporter/pkg/message"
+	"github.com/cornerjob/transporter/pkg/pipe"
 	"gopkg.in/mgo.v2/bson"
 )
 

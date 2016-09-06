@@ -5,9 +5,9 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/anortef/transporter/pkg/events"
-	"github.com/anortef/transporter/pkg/state"
-	"github.com/anortef/transporter/pkg/transporter"
+	"github.com/cornerjob/transporter/pkg/events"
+	"github.com/cornerjob/transporter/pkg/state"
+	"github.com/cornerjob/transporter/pkg/transporter"
 	"github.com/nu7hatch/gouuid"
 	"github.com/robertkrimen/otto"
 )

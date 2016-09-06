@@ -10,8 +10,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/anortef/transporter/pkg/adaptor"
-	"github.com/anortef/transporter/pkg/pipe"
+	"github.com/cornerjob/transporter/pkg/adaptor"
+	"github.com/cornerjob/transporter/pkg/pipe"
 )
 
 // A Node is the basic building blocks of transporter pipelines.

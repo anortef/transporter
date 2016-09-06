@@ -3,7 +3,7 @@ package transporter
 import (
 	"testing"
 
-	"github.com/anortef/transporter/pkg/adaptor"
+	"github.com/cornerjob/transporter/pkg/adaptor"
 )
 
 func TestNodeString(t *testing.T) {

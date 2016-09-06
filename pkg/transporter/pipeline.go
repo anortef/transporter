@@ -4,9 +4,9 @@ import (
 	"log"
 	"time"
 
-	"github.com/anortef/transporter/pkg/adaptor"
-	"github.com/anortef/transporter/pkg/events"
-	"github.com/anortef/transporter/pkg/state"
+	"github.com/cornerjob/transporter/pkg/adaptor"
+	"github.com/cornerjob/transporter/pkg/events"
+	"github.com/cornerjob/transporter/pkg/state"
 )
 
 // VERSION the library

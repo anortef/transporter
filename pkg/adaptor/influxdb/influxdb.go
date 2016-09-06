@@ -13,8 +13,8 @@ package influxdb
 // 	"fmt"
 // 	"net/url"
 
-// 	"github.com/anortef/transporter/pkg/message"
-// 	"github.com/anortef/transporter/pkg/pipe"
+// 	"github.com/cornerjob/transporter/pkg/message"
+// 	"github.com/cornerjob/transporter/pkg/pipe"
 // 	"github.com/influxdb/influxdb/client"
 // )
 

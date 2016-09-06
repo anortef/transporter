@@ -6,7 +6,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/anortef/transporter/pkg/pipe"
+	"github.com/cornerjob/transporter/pkg/pipe"
 )
 
 // ErrAdaptor gives the details of the failed adaptor

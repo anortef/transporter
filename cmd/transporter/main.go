@@ -4,8 +4,8 @@ import (
 	"log"
 	"os"
 
-	_ "github.com/anortef/transporter/pkg/adaptor/all"
-	"github.com/anortef/transporter/pkg/transporter"
+	_ "github.com/cornerjob/transporter/pkg/adaptor/all"
+	"github.com/cornerjob/transporter/pkg/transporter"
 	"github.com/mitchellh/cli"
 )
 

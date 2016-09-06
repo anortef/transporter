@@ -1,7 +1,7 @@
 package state
 
 import (
-	"github.com/anortef/transporter/pkg/message"
+	"github.com/cornerjob/transporter/pkg/message"
 )
 
 // MsgState encapsulates a message state to be stored in the SessionStore for

@@ -11,7 +11,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/anortef/transporter/pkg/adaptor"
+	"github.com/cornerjob/transporter/pkg/adaptor"
 )
 
 var (

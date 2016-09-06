@@ -1,6 +1,6 @@
 package adaptor
 
-import "github.com/anortef/transporter/pkg/pipe"
+import "github.com/cornerjob/transporter/pkg/pipe"
 
 // Creator defines the init structure for an adaptor
 type Creator func(*pipe.Pipe, string, Config) (StopStartListener, error)

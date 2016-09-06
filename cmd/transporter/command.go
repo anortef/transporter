@@ -4,7 +4,7 @@ import (
 	"flag"
 	"fmt"
 
-	"github.com/anortef/transporter/pkg/adaptor"
+	"github.com/cornerjob/transporter/pkg/adaptor"
 	"github.com/mitchellh/cli"
 )
 

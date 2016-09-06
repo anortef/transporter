@@ -6,7 +6,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/anortef/transporter/pkg/message"
+	"github.com/cornerjob/transporter/pkg/message"
 )
 
 func TestFilestore(t *testing.T) {

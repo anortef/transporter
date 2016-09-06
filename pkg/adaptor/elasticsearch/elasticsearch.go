@@ -6,9 +6,9 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/anortef/transporter/pkg/adaptor"
-	"github.com/anortef/transporter/pkg/message"
-	"github.com/anortef/transporter/pkg/pipe"
+	"github.com/cornerjob/transporter/pkg/adaptor"
+	"github.com/cornerjob/transporter/pkg/message"
+	"github.com/cornerjob/transporter/pkg/pipe"
 	elastigo "github.com/mattbaird/elastigo/lib"
 )
 
