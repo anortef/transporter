@@ -131,6 +131,7 @@ func (e *Elasticsearch) applyOp(msg *message.Msg) (*message.Msg, error) {
 	if err != nil {
 		id = ""
 	}
+	delete(msg.Map(), "_id")
 	
 	_, _type, err := msg.SplitNamespace()
 	if err != nil {
