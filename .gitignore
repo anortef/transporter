@@ -1,3 +1,4 @@
 /transporter
 .idea
 transporter.iml
+cmd/transporter/transporter
