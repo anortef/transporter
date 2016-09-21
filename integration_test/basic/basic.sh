@@ -48,6 +48,8 @@ echo "Comparing it from the expected"
 FROMEXP="$(cat expected_output)"
 if test "$FROMELS" = "$FROMEXP"; then
   echo "Transformer OK"
+  echo "Cleaning up the dockers"
+  docker rm -f mongo-basic-test els-basic-test
   exit 0
 else
   echo "Something went wrong"
