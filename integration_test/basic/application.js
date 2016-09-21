@@ -1,1 +1,1 @@
-pipeline = Source({name:"mongodb"}).save({name:"elastic"})
+pipeline = Source({name:"mongodb"}).transform({filename:"transform.js",namespace:"."}).save({name:"elastic"})

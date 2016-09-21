@@ -3,7 +3,6 @@ nodes:
     type: mongodb
     uri: mongodb://localhost:57017
     namespace: test.restaurants
-    tail: true
   elastic:
     type: elasticsearch
     uri: http://localhost:59200/
