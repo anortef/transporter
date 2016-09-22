@@ -29,6 +29,7 @@ type Mongodb struct {
 	uri   string
 	tail  bool // run the tail oplog
 	debug bool
+	onlytail bool
 	conf  Config
 
 	// save time by setting these once
@@ -87,6 +88,7 @@ func init() {
 			conf Config
 			err  error
 		)
+
 		if err = extra.Construct(&conf); err != nil {
 			return nil, err
 		}
@@ -105,6 +107,7 @@ func init() {
 			pipe:             p,
 			uri:              conf.URI,
 			tail:             conf.Tail,
+			onlytail:         conf.Onlytail,
 			debug:            conf.Debug,
 			path:             path,
 			opsBuffer:        make(map[string][]interface{}),
@@ -113,6 +116,7 @@ func init() {
 			bulk:             conf.Bulk,
 			conf:             conf,
 		}
+
 		// opsBuffer:        make([]*SyncDoc, 0, MONGO_BUFFER_LEN),
 
 		m.database, m.collectionMatch, err = extra.CompileNamespace()
@@ -190,10 +194,12 @@ func (m *Mongodb) Start() (err error) {
 		fmt.Printf("setting start timestamp: %d\n", m.oplogTime)
 	}
 
-	err = m.catData()
-	if err != nil {
-		m.pipe.Err <- err
-		return err
+	if ! m.onlytail {
+		err = m.catData()
+		if err != nil {
+			m.pipe.Err <- err
+			return err
+		}
 	}
 	if m.tail {
 		// replay the oplog
@@ -406,7 +412,7 @@ func (m *Mongodb) tailData() (err error) {
 
 		iter = collection.Find(query).LogReplay().Sort("$natural").Tail(m.oplogTimeout)
 	)
-
+	
 	for {
 		for iter.Next(&result) {
 			if stop := m.pipe.Stopped; stop {
@@ -526,6 +532,7 @@ type Config struct {
 	Ssl       *sslConfig `json:"ssl,omitempty" doc:"ssl options for connection"`
 	Timeout   string     `json:"timeout" doc:"timeout for establishing connection, format must be parsable by time.ParseDuration and defaults to 10s"`
 	Debug     bool       `json:"debug" doc:"display debug information"`
+	Onlytail  bool	     `json:"onlytail" doc:"If true when transporter starts it will not run through all of mongo it will only listen to the oplog"`
 	Tail      bool       `json:"tail" doc:"if tail is true, then the mongodb source will tail the oplog after copying the namespace"`
 	Wc        int        `json:"wc" doc:"The write concern to use for writes, Int, indicating the minimum number of servers to write to before returning success/failure"`
 	FSync     bool       `json:"fsync" doc:"When writing, should we flush to disk before returning success"`
