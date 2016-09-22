@@ -17,13 +17,16 @@ if [ $(docker ps -a|grep els-basic-test|wc -l) == 1 ]
 fi
 
 echo "starting mongo on port 57017(to avoid conflicts with existing ones)"
-docker run -d --name mongo-basic-test -p 0.0.0.0:57017:27017 mongo
+docker run -d --name mongo-basic-test -p 0.0.0.0:57017:27017 mongo mongod --replSet rs0 --oplogSize 100
 
 echo "starting elastic on port 59200"
 docker run -d --name els-basic-test -p 0.0.0.0:59200:9200 elasticsearch
 
 echo "We wait a couple of seconds to let everything start..."
 sleep 5
+
+echo "Initializing Oplog"
+docker exec -ti mongo-basic-test mongo --eval "rs.initiate()"
 
 echo "Preparing dummy data on mongodb"
 docker cp base-dataset.json mongo-basic-test:/base.json
