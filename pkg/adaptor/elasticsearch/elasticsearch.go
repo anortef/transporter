@@ -5,6 +5,8 @@ import (
 	"net/url"
 	"regexp"
 	"strings"
+	"os"
+	"io"
 
 	"github.com/cornerjob/transporter/pkg/adaptor"
 	"github.com/cornerjob/transporter/pkg/message"
@@ -132,6 +134,18 @@ func (e *Elasticsearch) applyOp(msg *message.Msg) (*message.Msg, error) {
 		id = ""
 	}
 	delete(msg.Map(), "_id")
+	msg_map := msg.Map()
+	last_update_date := msg_map["_updated_at"]
+	date_string := fmt.Sprint(last_update_date)
+	f, err := os.Create("last_date")
+	if err != nil {
+		fmt.Println(err)
+	}
+	n, err := io.WriteString(f, date_string)
+	if err != nil {
+		fmt.Println(n, err)
+	}
+	f.Close()
 	
 	_, _type, err := msg.SplitNamespace()
 	if err != nil {
