@@ -369,6 +369,7 @@ func (m *Mongodb) catData() (err error) {
 
 		var noStartingPoint = false
 		var last_update = ""
+		var sort_field = "_id"
 		last_update_content, err_read := ioutil.ReadFile("last_date")
 		if err_read != nil {
 			fmt.Printf("No starting point found.")
@@ -387,10 +388,11 @@ func (m *Mongodb) catData() (err error) {
 			query = bson.M{
 				"_updated_at": bson.M{"$gte": t},
 			}
+			sort_field = "_updated_at"
 		}
 
 
-		iter := m.mongoSession.DB(m.database).C(collection).Find(query).Sort("_updated_at").Iter()
+		iter := m.mongoSession.DB(m.database).C(collection).Find(query).Sort(sort_field).Iter()
 
 		for {
 			for iter.Next(&result) {
