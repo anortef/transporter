@@ -9,6 +9,7 @@ import (
 	"strings"
 	"sync"
 	"time"
+	"io/ioutil"
 
 	"github.com/cornerjob/transporter/pkg/adaptor"
 	"github.com/cornerjob/transporter/pkg/message"
@@ -362,11 +363,34 @@ func (m *Mongodb) catData() (err error) {
 		}
 
 		var (
-			query  = bson.M{}
+			query = bson.M{}
 			result bson.M // hold the document
 		)
 
-		iter := m.mongoSession.DB(m.database).C(collection).Find(query).Sort("_id").Iter()
+		var noStartingPoint = false
+		var last_update = ""
+		last_update_content, err_read := ioutil.ReadFile("last_date")
+		if err_read != nil {
+			fmt.Printf("No starting point found.")
+			noStartingPoint = true
+		}
+
+		if ! noStartingPoint || last_update != "" {
+			last_update = strings.TrimSpace(string(last_update_content))
+
+			//2016-08-11 10:58:09.354 +0200 CEST
+			var custom_parser = "2006-01-02 15:04:05.000 -0700 MST"
+			t, errDate := time.Parse(custom_parser, last_update)
+			if errDate != nil {
+				fmt.Errorf("%+v\n",errDate)
+			}
+			query = bson.M{
+				"_updated_at": bson.M{"$gte": t},
+			}
+		}
+
+
+		iter := m.mongoSession.DB(m.database).C(collection).Find(query).Sort("_updated_at").Iter()
 
 		for {
 			for iter.Next(&result) {
@@ -412,7 +436,7 @@ func (m *Mongodb) tailData() (err error) {
 
 		iter = collection.Find(query).LogReplay().Sort("$natural").Tail(m.oplogTimeout)
 	)
-	
+
 	for {
 		for iter.Next(&result) {
 			if stop := m.pipe.Stopped; stop {
