@@ -135,7 +135,7 @@ func (e *Elasticsearch) applyOp(msg *message.Msg) (*message.Msg, error) {
 	}
 	delete(msg.Map(), "_id")
 	msg_map := msg.Map()
-	last_update_date, exists := msg_map["_updated_at"]
+	last_update_date, exists := msg_map["updatedAt"]
 	if exists {
 		date_string := fmt.Sprint(last_update_date)
 		f, err := os.Create("last_date")
